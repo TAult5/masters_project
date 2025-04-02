@@ -1,0 +1,5 @@
+train: S:/data_tyler/dataset/train
+val: S:/data_tyler/dataset/val
+test: S:/data_tyler/dataset/test
+nc: 7
+names: ['trauma_head', 'trauma_torso', 'trauma_lower_ext', 'amputation_lower_ext', 'trauma_upper_ext', 'amputation_upper_ext', 'severe_hemorrhage']
