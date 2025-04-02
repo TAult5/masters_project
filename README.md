@@ -13,7 +13,7 @@ My portion of the project consisted of a continuation of Daniel Peace's work don
 The majority of effort during this project was put towards supplementing model training with additional labeled data and fine tuning of the models for increased accuracy and performance. The model initially implemented in the project was the [YoloV8](https://docs.ultralytics.com/models/yolov8/) model, developed by Ultralytics. I elected to train and evaluate the performance of the [YoloV11](https://docs.ultralytics.com/models/yolo11/) model, and ultimately determined that the v11 model outperformed the v8 model in identifying most classes. 
 
 ## Hardware and Software
-Training was conducted on an RTX 4080 Laptop GPU, 12GB.
+Training was conducted on an RTX 4080 Laptop GPU, 12GB. CUDA acceleration would work on training the models, but I found that no matter which troubleshooting I attempted, I could not get CUDA to work properly when using the `tune` function. Even explicitely listing `device = 'cuda'` in the paramters to be passed in the function, it would default back to CPU while running the function. This was discovered by running `print(next(model.parameters()).device)` after running a tuner.
 
 Jupyter Notebook was utilized as the primary IDE for ease of running indivdual cells asynchronously. Any external files, such as the data.yaml and best_hyperparameters.yaml files, were edited in VS Code, if necessary.
 
