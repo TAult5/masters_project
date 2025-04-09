@@ -51,6 +51,21 @@ S:/ Drive
   - weights
     - best.pt
     - last.pt
+## Images & Labeling
+As mentioned above, labelimg was used as the labeling tool for labeling all images. The first step is to load a directory of images to be labeled. Whenever I opened a new directory, I would start with a junk image to label with all my classes, and then later remove it. This was to circumvent a weird quirk with the way labelimg loads classes as you label. You will also need to open a save directory, typically `labels`, where you would like the labels to be stored. labels are stored as a .txt file, with the corresponding class saved as a number, and the coordinates for the bounding box drawn during labeling. Because there are 7 classes, the first number will correspond with each class, 0-6. Labelimg will add additional rows to the text file for each label in the image. 
+
+The classes are as follows: 
+- trauma_head
+- trauma_torso
+- trauma_lower_ext
+- amputation_lower_ext
+- trauma_upper_ext
+- amputation_upper_ext
+- severe_hemorrhage
+
+For the purpose of labeling, I tried to maintain a uniform labeling policy. For injuries pertaining to the head, only the head was encapsulated by the bounding box. For purpose of all other injuries, the entirety of the body was encapsulated. This was to give spacial context to the labels during training, and due to time constraints, I was not able to test other methods of labeling for efficiency. My concern was that the model would not be able to differentiate between upper and lower injuries, especially amputations, without additional context on the location of the injury in relation to the victim.
+
+Once labeling of a directory was complete, the junk image, typically names `junk_image` and its corresponding label were discarded and all other images and labels would be moved to main_images and main_labels. Although rare, there is a chance to encounter naming conflicts when compiling the images and labels in the main folders, so that needs to be resolved during movement. One of the files mentioned below will assist with a standardized naming syntax once all images and labels are in the main folders, so no need to worry about renaming all of the images and labels prior to moving.
 
 ## Project Files
 
