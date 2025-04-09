@@ -118,6 +118,8 @@ Cell 1 loads the models with their trained weights referenced.
 
 Cell 3 and 4 conduct validation on v8 and v11, respectively.
 
-Cell 6 is used to manually test unlabled images with the model. The unlabeled images need to be loaded as an array. When the `for` loop is ran, it will iterate through the loaded array and attempt to label each image. **THIS WILL TAKE A COUPLE OF MINUTES OR LONGER TO RUN, AS IT LOADS EACH IMAGE AFTERWARDS WITH THE LABEL IT THINKS THE IMAGE SHOULD HAVE.** 
+Cell 6 is used to manually test unlabled images with the model. The unlabeled images need to be loaded as an array. When the `for` loop is ran, it will iterate through the loaded array and attempt to label each image. **THIS WILL TAKE A COUPLE OF MINUTES OR LONGER TO RUN, AS IT LOADS EACH IMAGE AFTERWARDS WITH THE LABEL IT THINKS THE IMAGE SHOULD HAVE.** It is not recommended to run more than a dozen images through this loop at a time, as it will launch each labeled image in your default image viewer with the correct label.
+
+## Results
 
 
