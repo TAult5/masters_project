@@ -79,7 +79,22 @@ This file is used to determine the best hyperparameters to train the models with
 
 Model tuning is pretty straightforward, but very computationally time consuming. Changing `iterations` will change how many "rounds" the tuner goes through. For example, I set `iterations = 100` when running the tuner for v8. The total time to run 100 iterations on the current dataset took 33,813.27 seconds, or about 9.4 hours in total. The output, saved as a best_hyperparameters.yaml file will give the specifics on each of the best parameters found for that model, including learning rates, momentum, decay, and some data augmentation, and will include the best fitness metrics found during the tuning process, and at what iteration the metrics were found at. 
 
-Additionally, tuning time is effected by model, as well. Yolov11 was only tuned for 50 iterations, and had a total tuning time of 53,386.27 seconds, or roughly 14.8 hours. 
+Additionally, tuning time is effected by the version of the model, as well. Yolov11 was only tuned for 50 iterations, and had a total tuning time of 53,386.27 seconds, or roughly 14.8 hours. 
+
+It is important to note where the default output of your IDE goes to. My default was set to `C:/Users/tyler/runs/detect/tuner#`, which is where the best_hyperparameters.yaml file will be located.
+
+### mscs_train_models
+Onto training. Just like with the tuner file, each model needs to be called and assigned; in this case, `model`(v8) and `model2`(v11). You will also need to reference the data.yaml file, if running this in a seperate kernel from the tuner file. 
+
+Cell 3 of this file will manually load the hyperparameters to their respective model. Yolo's `train` functions do not allow you to directly reference hyperparameters as some models do, so this cell is necessary to properly load them. This uses the `model.overrides.update` function to manually override the default hyperparameters.
+
+Cell 4 is used to verify that the hyperparameters were properly loaded to the model. I commented in what the expected values of a couple hyperparameters should be, but when using different hyperparameters than what I have, you can just open the yaml file and verify manually.
+
+Cell 5 was used to train the Yolov8 model. `data` will reference your `file_path_data`, which is your data.yaml file. Epochs will change how long the model will run for, and I used a `patience` parameter of 20, which is Yolo's version of early stopping. This will stop training if there are no improvements to the model after 20 total iterations. This can be set to 0 or 300 to ignore patience, or deleted entirely and not passed as a parameter. 
+
+The same procedures were used for training the Yolov11, with the exception being that a different `best_hyperparameters.yaml` file will need to be referenced, in this case being `best_hyperparameters_v11.yaml`.
+
+Likewise with the tuning file, the `train`function will output weights and results to wherever your IDE defaults to. Outputs include best and last weights, confusion matrices, and different graphs on the results. Because Yolo saves both your best and last weights, you don't necessarily need to pass a patience parameter, if time or computation isn't a concern.
 
 
 
