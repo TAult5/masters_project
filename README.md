@@ -20,3 +20,67 @@ Jupyter Notebook was utilized as the primary IDE for ease of running indivdual c
 [labelimg](https://github.com/HumanSignal/labelImg) was utilized for labeling all images. It is no longer being actively developed, so it may not work properly with newer versions of Python. I encountered an issue with datatypes while trying to run it, which resulted in the program crashing anytime there was an attempt to draw a bounding box; the solution requires editing certain Python libraries to ensure the the correct datatypes are being passed; if this issue is encountered, the solution can be found [here](https://github.com/HumanSignal/labelImg/issues/872#issuecomment-1309017766).
 
 Due to DARPA requirements on data privacy, [VeraCrypt](https://www.veracrypt.fr/code/VeraCrypt/) was utilized for all data encryption.
+
+## File Structure
+Below is how the file structure was organized for this project. The code will need to be changed as needed to accommadate a different file structure. main_images and main_labels were used to store all images and labels prior to being split into training, validation, and test sets, and left in place as a backup, should issues arise with the dataset files. The v8_training and v11_training folders were used to store the weights, which could be referenced by function in the overall project. Only **ONE** best.pt file should be kept in their respective weight folders. The data.yaml file will be explained in detail below, with explanations of the different project files.
+
+There is no need to manually allocate images and labels to their respective folders, once placed in the main_images and main_labels folders. A function, which will be explained below will handle that.
+
+S:/ Drive
+- data_tyler
+  - data.yaml
+  - best_hyperparameters_v8
+  - best_hyperparameters_v11
+  - dataset
+    - train
+      - images
+      - labels
+    - val
+      - images
+      - labels
+    - test
+      - images
+      - labels
+- main_images
+- main_labels
+- v8_training
+  - weights
+    - best.pt
+    - last.pt
+- v11_training
+  - weights
+    - best.pt
+    - last.pt
+
+## Project Files
+
+As mentioned earlier when discussed that the IDE of choice was Jupyter Notbook, with the exception of the data.yaml file, all other project files (excluding images and labels) are saved as the .ipynb filetype.
+
+### data.yaml
+The data.yaml file is used to referance the appropriate filepaths for training, validation, and testing, as well as storing the number of classes, `nc: #`, as necessary, and the class names, stored as an array of `names: ['class1, class2, ...]`.
+
+The `train:`, `val:`, and `test:` pathing may need to be changed to support a different file structure. Referencing the file structure section as an example, the path for my training set would be `train: S:/data_tyler/dataset/train`. You do not need to reference the image or label folders within the train, val, or test folders.
+
+### mscs_Compare_directories_funct.ipynb
+This is the _good housekeeping_ file. Initially the project had images stored in multiple locations, so after consolidating all the images and labels into the main_images and main_labels folders, running this file will provide an output of any image files that don't have corresponding labels, and any labels that don't have corresponding images associated with them.
+
+### mscs_rename_files.ipynb
+This file is intended to rename all images and their corresponding labels to one uniform syntax. This may not be necessary, but was developed after the labeling process when I was using multiple directories to store the images and labels. After consolidating all images to main_images and all labels to main_labels, and running the compare_directories function, this function was ran to create the uniform syntax of image_000001, image_000002, ..., and likewise for all labels associated with each image. A warning will be triggered if the number of images and labels don't match, with the output of "Warning: The number of image and label files do not match!" being produced if that is the case. In that case, the user can run the compare_directories function again to determine what image or label file may be causing the issue.
+
+### mscs_train_val_test_split_func
+This code is used to properly split the data, once organized, into appropriate directories. Again, pathing referenced in this file may need to be changed to accommadate different file structures. 
+
+`image_dir` should reference main_images, `label_dir` should reference main_labels, and `dest_dirs` should reference the corresponding train, val, and test directories. The images are shuffled using the `random` function, and then the ratios are assigned. For the purpose of this project, I used a 70% training / 20% validation split, with the remainder being put into the test folder. 
+
+Running the `for split` loop will copy the image to the new directory, then determine the corresponding lable and copy that to the new directory, as well. Once this function has been ran, it's good practice to go back and manually verify that the function correctly deposited images and labels in proper amounts. Edits can be made to the compare_directories function to also verify this.
+
+### mscs_hyp_tuner
+This file is used to determine the best hyperparameters to train the models with. Upon completion of organizing all files and establishing the proper train, val, test split, this file may be used. Cell one loads both the v8 and v11 models as `model` and `model2` respectively. `file_path_data` is used to reference the location of the data.yaml file. I left the cell with `import torch` in there in an effort to force the tuner to use CUDA for the tuning, but could not get it to properly do so. Some sort of callback in the loop of the tuner was forcing it to defaul to the CPU for tuning.
+
+Model tuning is pretty straightforward, but very computationally time consuming. Changing `iterations` will change how many "rounds" the tuner goes through. For example, I set `iterations = 100` when running the tuner for v8. The total time to run 100 iterations on the current dataset took 33,813.27 seconds, or about 9.4 hours in total. The output, saved as a best_hyperparameters.yaml file will give the specifics on each of the best parameters found for that model, including learning rates, momentum, decay, and some data augmentation, and will include the best fitness metrics found during the tuning process, and at what iteration the metrics were found at. 
+
+Additionally, tuning time is effected by model, as well. Yolov11 was only tuned for 50 iterations, and had a total tuning time of 53,386.27 seconds, or roughly 14.8 hours. 
+
+
+
+
