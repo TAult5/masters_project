@@ -96,6 +96,13 @@ The same procedures were used for training the Yolov11, with the exception being
 
 Likewise with the tuning file, the `train`function will output weights and results to wherever your IDE defaults to. Outputs include best and last weights, confusion matrices, and different graphs on the results. Because Yolo saves both your best and last weights, you don't necessarily need to pass a patience parameter, if time or computation isn't a concern.
 
+### mscs_val_test_models
+This file is pretty straightforward; this is used to manually conduct validation and testing on the models performance. 
 
+Cell 1 loads the models with their trained weights referenced.
+
+Cell 3 and 4 conduct validation on v8 and v11, respectively.
+
+Cell 6 is used to manually test unlabled images with the model. The unlabeled images need to be loaded as an array. When the `for` loop is ran, it will iterate through the loaded array and attempt to label each image. **THIS WILL TAKE A COUPLE OF MINUTES OR LONGER TO RUN, AS IT LOADS EACH IMAGE AFTERWARDS WITH THE LABEL IT THINKS THE IMAGE SHOULD HAVE.** 
 
 
