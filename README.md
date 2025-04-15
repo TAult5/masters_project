@@ -21,6 +21,9 @@ Jupyter Notebook was utilized as the primary IDE for ease of running indivdual c
 
 Due to DARPA requirements on data privacy, [VeraCrypt](https://www.veracrypt.fr/code/VeraCrypt/) was utilized for all data encryption.
 
+### Additional Packages
+I elected to use Albumentations for Yolov11, as Yolov11 integrates automatically with the library, and requires no additional code to implement. Albumentations is a library for easy image augmentation, in addition to what is already implemented by default with the Yolo models. Installed through command line via `pip install albumentation ultralytics`. Documentation for the package may be found [here](https://www.albumentations.ai/docs/).
+
 ## File Structure
 Below is how the file structure was organized for this project. The code will need to be changed as needed to accommadate a different file structure. main_images and main_labels were used to store all images and labels prior to being split into training, validation, and test sets, and left in place as a backup, should issues arise with the dataset files. The v8_training and v11_training folders were used to store the weights, which could be referenced by function in the overall project. Only **ONE** best.pt file should be kept in their respective weight folders. The data.yaml file will be explained in detail below, with explanations of the different project files.
 
