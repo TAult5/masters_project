@@ -125,13 +125,14 @@ Cell 6 is used to manually test unlabled images with the model. The unlabeled im
 
 ## Results
 
-Below are the best validation results for the v8 model. 
+Below are the best validation results and F1-Confidence curve for the v8 model. 
 ![Confusion Maxtrix for Yolov8.](https://github.com/TAult5/masters_project/blob/main/Images/confusion_matrix_v8.png)
 ![Normalized confusion matrix for Yolov8.](https://github.com/TAult5/masters_project/blob/main/Images/confusion_matrix_normalized_v8.png)
+![F1 curve for Yolov8.](https://github.com/TAult5/masters_project/blob/main/Images/F1_curve_v8.png)
 
 
-
-Below are the best validation results for the v11 model.
+Below are the best validation results and F1-Confidence curve for the v11 model.
 ![Confusion Maxtrix for Yolov11.](https://github.com/TAult5/masters_project/blob/main/Images/confusion_matrix_v11.png)
 ![Normalized confusion matrix for Yolov11.](https://github.com/TAult5/masters_project/blob/main/Images/confusion_matrix_normalized_v11.png)
+![F1 curve for Yolov8.](https://github.com/TAult5/masters_project/blob/main/Images/F1_curve_v11.png)
 
