@@ -136,3 +136,7 @@ Below are the best validation results and F1-Confidence curve for the v11 model.
 ![Normalized confusion matrix for Yolov11.](https://github.com/TAult5/masters_project/blob/main/Images/confusion_matrix_normalized_v11.png)
 ![F1 curve for Yolov8.](https://github.com/TAult5/masters_project/blob/main/Images/F1_curve_v11.png)
 
+
+
+Blind test conducted on unseen data, prediction labels from model:
+![Blind test on v11 model.](https://github.com/TAult5/masters_project/blob/main/Images/Labeled%20blind%20test%201.png)
