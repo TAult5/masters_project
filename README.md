@@ -108,6 +108,8 @@ Cell 3 of this file will manually load the hyperparameters to their respective m
 
 Cell 4 is used to verify that the hyperparameters were properly loaded to the model. I commented in what the expected values of a couple hyperparameters should be, but when using different hyperparameters than what I have, you can just open the yaml file and verify manually.
 
+**Important to note: calling the hyperparameters and loading them into the model will work for most of the hyperparameters. You will have to explicitly pass the parameter settings for the optimizer, lr0, lrf, momentum, and weight decay, otherwise the function will overrite these values with what it thinks are the best settings to use. Yolo has an internal "optimizer=auto" setting that I found was overwriting the above mentioned hyperparameters.**
+
 Cell 5 was used to train the Yolov8 model. `data` will reference your `file_path_data`, which is your data.yaml file. Epochs will change how long the model will run for, and I used a `patience` parameter of 20, which is Yolo's version of early stopping. This will stop training if there are no improvements to the model after 20 total iterations. This can be set to 0 or 300 to ignore patience, or deleted entirely and not passed as a parameter. 
 
 The same procedures were used for training the Yolov11, with the exception being that a different `best_hyperparameters.yaml` file will need to be referenced, in this case being `best_hyperparameters_v11.yaml`.
