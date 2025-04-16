@@ -125,6 +125,14 @@ Cell 6 is used to manually test unlabled images with the model. The unlabeled im
 
 ## Results
 
+At the time of writing this documentation, no real-world (integrated) testing was conducted with these updated models. All validation and testing was conducted through functions, as seen in the `mscs_val_test_models.ipynb` file. 
+
+The overall accuracy of the v8 model using current hyperparameters and weights was ~80% averaged between all classes, with a range of 63% for the lowest class, up to 100% for the highest class. 
+
+The overall accuracy of the v11 model using current hyperparameters and weights was ~79.9% averaged between all classes, with a range of 62% for the lowest class, up to 100% for the highest class.
+
+Limited "blind" testing was conducted on models to determine how well they would perform and label completely "unseen" data (images that had no similar likeness to images in the validation sets). At this time, I do not have extensive data on the overall performance of the blind tests, as they were conducted on the limited images I had available to conduct the test, and were conducted in very small batches. As seen below in the first labeled image, the model accurately predicted lower extremity trauma, albeit with a lower confidence score of just 54%. The second labeled image is an example of the model predicting the wrong label with high confidence (torse trauma at 85%), although it did correctly predict severe hemorrhaging with very low confidence (25%). 
+
 Below are the best validation results and F1-Confidence curve for the v8 model. 
 ![Confusion Maxtrix for Yolov8.](https://github.com/TAult5/masters_project/blob/main/Images/confusion_matrix_v8.png)
 ![Normalized confusion matrix for Yolov8.](https://github.com/TAult5/masters_project/blob/main/Images/confusion_matrix_normalized_v8.png)
@@ -140,3 +148,10 @@ Below are the best validation results and F1-Confidence curve for the v11 model.
 
 Blind test conducted on unseen data, prediction labels from model:
 ![Blind test on v11 model.](https://github.com/TAult5/masters_project/blob/main/Images/Labeled%20blind%20test%201.png)
+
+
+Example of poor performance on blind test:
+![Blind test on v11 model with incorrect predictions.](https://github.com/TAult5/masters_project/blob/main/Images/Labeled%20blind%20test%202%20bad.png)
+
+### Conclusion
+While the models arguably perform decently well with validation, they are still struggling with data that is drastically different than the training and validation images. The core cause of this issue can most likely be attributed to the fact that most of the training data is derived from a limited number of runs, meaning the training images have a very similar likeness to the validation images. Additionally, this means many of the class examples are very limited to specific orientations and setups. Although data augmentation was applied internally through hyperparameter tuning and Albumentations, I don't think it's enough to overcome the limited examples of casualties in the dataset. Also, while most of the dataset is very balanced, there are some examples of imbalance, such as upper extremity amputation only have 2 images in the validation set (due to there being limited examples of that class available at all). 
