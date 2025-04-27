@@ -101,7 +101,7 @@ Additionally, tuning time is effected by the version of the model, as well. Yolo
 
 It is important to note where the default output of your IDE goes to. My default was set to `C:/Users/tyler/runs/detect/tuner#`, which is where the best_hyperparameters.yaml file will be located.
 
-### mscs_train_models
+### mscs_train_model
 Onto training. Just like with the tuner file, each model needs to be called and assigned; in this case, `model`(v8) and `model2`(v11). You will also need to reference the data.yaml file, if running this in a seperate kernel from the tuner file. 
 
 Cell 3 of this file will manually load the hyperparameters to their respective model. Yolo's `train` functions do not allow you to directly reference hyperparameters as some models do, so this cell is necessary to properly load them. This uses the `model.overrides.update` function to manually override the default hyperparameters.
