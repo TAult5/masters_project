@@ -168,5 +168,9 @@ Labeling: I experimented with different labeling techniques before settling on h
 Tuning: adding more data will require more tuning. This was potentially the most time-consuming and computational resource-consuming out of the entire project. Due to the large amount of time it takes to run the model tuner, I would recommend doing this immediately after increasing the dataset size. I only ran the v11 tuner for 50 iterations (15 hours), but would recommend future runs using at least 100 iterations or more; the large amount of parameters in the model and complex task of this project requires more iterations to determine the most optimal hyperparameters. Also, based off the tune_fitness output, the current iteration of the dataset was not ideal for the tuner.
 
 ### Acknowledgments and Disclaimers
-Any opinions, statements, or work on this project are my own and do not represent or imply endoresement, explicitly or implicitly, by DARPA, the DoD, or the US Government.
+I would like to thank Professor Jason Isaacs and Kevin Knoedler for their help and support throughout this project. 
+
+Any opinions, statements, or work on this project are my own and do not represent or imply endoresement, explicitly or implicitly, by DARPA, the DoD, or the US Government (USG).
+
+Conflict of interest disclaimer: This project does not relate to any work or products I use within the USG, and was conducted independently from my personal work. There are no special interests that may have influenced my participation, effort, or published results while working on this project. 
 
